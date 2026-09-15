@@ -126,7 +126,7 @@ def chinese_number(number):
         number = number[1:]
         prefix = '正'
     cl = 0
-    while cl >= len(number) - 2 and number[cl] == '0':
+    while cl < len(number) and number[cl] == '0':
         cl += 1
     number = number[cl:]
     if '/' in number:
@@ -143,7 +143,7 @@ def chinese_number(number):
                 raise ValueError('Inlegal DEC number.')
         for i in range(10):
             number[1] = number[1].replace(chr(i+48),'零一二三四五六七八九'[i])
-        return _small2cn(prefix,number[0],number[1])
+        return _small2cn(prefix,number[0] or '0',number[1])
     for i in number:
         if not('0' <= i <= '9'):
             raise ValueError('Inlegal DEC number.')
