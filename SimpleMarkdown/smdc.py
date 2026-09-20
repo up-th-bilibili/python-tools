@@ -151,9 +151,9 @@ def parser_options(options,extensions):
             if "function" in ext and 'args' in ext:
                 if i.endswith('.json'):
                     temp = i[:-5]
-                elif ext.endswith('.ext'):
+                elif i.endswith('.ext'):
                     temp = i[:-4]
-                elif ext.endswith('.lib'):
+                elif i.endswith('.lib'):
                     temp = i[:-4]
                 else:
                     temp = i
@@ -177,6 +177,11 @@ def parser_options(options,extensions):
     return encoding
 def smd_to_html(smd,extensions):
     ESCAPE_TABLE = {'*','\\','`','^','#'}
+    HTML_SPECIAL = {
+        '>':'&gt;',
+        '<':'&lt;',
+        '&':'&amp;'
+    }
     i = 0
     expect = []
     stack = []
@@ -197,7 +202,7 @@ def smd_to_html(smd,extensions):
                 result += smd[i]
             i += 1
         else:
-            result += smd[i]
+            result += HTML_SPECIAL.get(smd[i],smd[i])
             i += 1
     while i < len(smd):
         if expect and smd[i:i+len(expect[-1])] == expect[-1]:
