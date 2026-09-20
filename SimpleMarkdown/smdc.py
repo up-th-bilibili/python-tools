@@ -46,7 +46,7 @@ def parse_html(html):
                     sys.exit(-1)
                 while is_html_elem(html[i]):
                     i += 1
-                elem['element'] = html[start:i]
+                elem['element'] = html[start:i].lower()
                 while html[i] not in '/>':
                     check = i
                     while html[i] in '\t\n\f\r ':
@@ -61,7 +61,7 @@ def parse_html(html):
                     while is_html_elem(html[i]) or html[i] in '_:.':
                         i += 1
                     key = html[start:i].lower()
-                    if key in elem:
+                    if key in elem['attribute']:
                         sys.stderr.write(f"repeat attribute name '{key}' at extension loading.\n")
                         sys.stderr.flush()
                         sys.exit(-1)
@@ -115,7 +115,7 @@ def extension_init(ext,typ=None):
         return res
     else:
         res = {}
-        for i,j in ext:
+        for i,j in ext.items():
             res[i] = extension_init(j)
         return res
 def getdefaultfile(target):
@@ -150,13 +150,13 @@ def parser_options(options,extensions):
                 sys.exit(-1)
             if "function" in ext and 'args' in ext:
                 if i.endswith('.json'):
-                    temp = i[:-5]
+                    temp = i[17:-5]
                 elif i.endswith('.ext'):
-                    temp = i[:-4]
+                    temp = i[17:-4]
                 elif i.endswith('.lib'):
-                    temp = i[:-4]
+                    temp = i[17:-4]
                 else:
-                    temp = i
+                    temp = i[17:]
                 extensions[temp] = extension_init(ext,exec)
             elif not(extensions.keys() & ext.keys()):
                 extensions.update(extension_init(ext))
@@ -237,7 +237,7 @@ def smd_to_html(smd,extensions):
                             break
                         while smd[i].isdigit():
                             i += 1
-                        if smd[i] != '.':
+                        if i >= len(smd) or smd[i] != '.':
                             result += '\n</ol>'
                             i = curr
                             break
@@ -286,7 +286,7 @@ def smd_to_html(smd,extensions):
                 i += 1
             start = i - start
             result += f'<h{start}>'
-            while smd[i] in '\t\n\f\r ':
+            while i < len(smd) and smd[i] in '\t\n\f\r ':
                 i += 1
             while i < len(smd) and smd[i] != '\n':
                 text_handle()
