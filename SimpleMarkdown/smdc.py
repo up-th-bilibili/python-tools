@@ -207,9 +207,62 @@ def smd_to_html(smd,extensions):
             if extra_temp is not None:
                 # extra_temp must be None or callable
                 extra_temp(expect,stack,extra)
+        elif smd[i] == '\n':
+            curr = i+1
+            while i < len(smd) and smd[i] in '\t\n\f\r ':
+                i += 1
+            if i < len(smd) and smd[i].isdigit():
+                while smd[i].isdigit():
+                    i += 1
+                if smd[i] == '.':
+                    result+='\n<ol>\n<li>'
+                    while True:
+                        i += 1
+                        while i < len(smd) and smd[i] in '\t\n\f\r ':
+                            i += 1
+                        while i < len(smd) and smd[i] != '\n':
+                            text_handle()
+                        result+='</li>'
+                        curr = i
+                        while i < len(smd) and smd[i] in '\t\n\f\r ':
+                            i += 1
+                        if i >= len(smd) or not smd[i].isdigit():
+                            result += '\n</ol>'
+                            i = curr
+                            break
+                        while smd[i].isdigit():
+                            i += 1
+                        if smd[i] != '.':
+                            result += '\n</ol>'
+                            i = curr
+                            break
+                        result += '\n<li>'
+                else:
+                    i = curr
+                    result += '\n'
+            elif i < len(smd) and smd[i] == '-':
+                result+='\n<ul>\n<li>'
+                while True:
+                    i += 1
+                    while i < len(smd) and smd[i] in '\t\n\f\r ':
+                        i += 1
+                    while i < len(smd) and smd[i] != '\n':
+                        text_handle()
+                    result+='</li>'
+                    curr = i
+                    while i < len(smd) and smd[i] in '\t\n\f\r ':
+                        i += 1
+                    if i >= len(smd) or smd[i] != '-':
+                        result += '\n</ul>'
+                        i = curr
+                        break
+                    result += '\n<li>'
+            else:
+                i = curr
+                result += '\n'
         elif smd[i:i+3] == '  \n':
             result += '<br/>'
-            i += 3
+            i += 2
         elif smd[i:i+2] in {'**','^^'}:
             result += '<strong>'
             expect.append(smd[i:i+2])
