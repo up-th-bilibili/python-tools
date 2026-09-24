@@ -1,0 +1,6 @@
+{
+    "pure":"'!pure'",
+    "default":"getdefaultfile('default.css')",
+    "tech":"getdefaultfile('tech.css')",
+    "document":"getdefaultfile('document.css')"
+}
