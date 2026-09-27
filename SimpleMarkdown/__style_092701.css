@@ -1,0 +1,218 @@
+/* 清爽、技术文档风格，兼顾可读性与层次  目前还需要技术性调整以适应本项目 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f6f8fa;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    padding: 2rem 1rem;
+}
+
+.page {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 8px 12px -6px rgba(0, 0, 0, 0.05);
+    padding: 2.5rem 2.8rem;
+    border: 1px solid #e2e8f0;
+}
+
+@media (max-width: 700px) {
+    body {
+        padding: 1rem 0.5rem;
+    }
+    .page {
+        padding: 1.8rem 1.2rem;
+        border-radius: 1rem;
+    }
+}
+
+/* 标题与装饰 */
+h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #0f172a;
+    border-left: 6px solid #2563eb;
+    padding-left: 1.4rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.subhead {
+    font-size: 1.1rem;
+    color: #475569;
+    margin-bottom: 2.5rem;
+    padding-left: 2rem;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 1rem;
+}
+
+h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 2.5rem 0 1rem 0;
+    color: #0f172a;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+h2::before {
+    content: "▍";
+    color: #2563eb;
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 1.8rem 0 0.8rem 0;
+    color: #1e293b;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px dashed #cbd5e1;
+}
+
+/* 段落与内联代码 */
+p {
+    margin-bottom: 1rem;
+    color: #334155;
+}
+
+code, .mono {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Consolas, monospace;
+    background: #f1f5f9;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.35rem;
+    font-size: 0.9em;
+    color: #0f172a;
+    border: 1px solid #e2e8f0;
+}
+
+.badge {
+    display: inline-block;
+    background: #2563eb;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+/* 表格样式 */
+.table-wrap {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border-radius: 0.75rem;
+    border: 1px solid #e2e8f0;
+    background: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    min-width: 600px;
+}
+
+th {
+    background: #f8fafc;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.9rem 1rem;
+    border-bottom: 2px solid #e2e8f0;
+    color: #0f172a;
+    white-space: nowrap;
+}
+
+td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid #edf2f7;
+    vertical-align: top;
+    color: #1e293b;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.highlight {
+    background: #eff6ff;
+    border-left: 3px solid #2563eb;
+    padding: 1rem 1.2rem;
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+}
+
+.note {
+    background: #fefce8;
+    border-left: 4px solid #eab308;
+    padding: 1rem 1.2rem;
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+    color: #422006;
+}
+
+.struct-diagram {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 1.4rem 1.8rem;
+    border-radius: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: #1e293b;
+    white-space: pre;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+.struct-diagram span {
+    color: #2563eb;
+    font-weight: 600;
+}
+
+.field-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin: 0.8rem 0 1.2rem;
+}
+
+.field-tag {
+    background: #f1f5f9;
+    border-radius: 0.4rem;
+    padding: 0.2rem 0.8rem;
+    font-family: monospace;
+    font-size: 0.85rem;
+    border: 1px solid #e2e8f0;
+}
+
+hr {
+    margin: 2rem 0;
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #cbd5e1, transparent);
+}
+
+.small-meta {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-top: 2.5rem;
+    text-align: center;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1.5rem;
+}
